@@ -47,7 +47,7 @@ export default function Interface() {
         </div>
       )}
       {/* Controls */}
-      <div className="controls">
+      {/* <div className="controls">
         <div className="raw">
           <div className={`key ${forward ? 'active' : ''}`}></div>
         </div>
@@ -59,7 +59,7 @@ export default function Interface() {
         <div className="raw">
           <div className={`key large ${jump ? 'active' : ''}`}></div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
