@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/hands": "^0.4.1675469240",
+    "@mediapipe/tasks-vision": "^0.10.9",
     "@react-three/drei": "^9.32.4",
     "@react-three/fiber": "^8.8.7",
     "@react-three/postprocessing": "2.6",

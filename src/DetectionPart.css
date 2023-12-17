@@ -1,0 +1,37 @@
+.detection-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0rem 0;
+    position: relative;
+    height: 90vh;
+    min-width: 33vw;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #69ebca, #7a42af);
+}
+
+.camera-feed-container {
+    position: relative;
+}
+
+.camera-feed {
+    margin: 16px;
+    border-radius: 16px;
+    width: 468px;
+    height: 263.5px;
+}
+
+.output_canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mirror-scene {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
