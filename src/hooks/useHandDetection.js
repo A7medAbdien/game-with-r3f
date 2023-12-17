@@ -5,10 +5,10 @@ import { FilesetResolver, HandLandmarker, HandLandmarkerOptions } from "@mediapi
 
 const useHandDetection = () => {
     const [direction, setDirection] = useState('');
-    const videoRef = useRef < HTMLVideoElement > (null);
-    const webcamButtonRef = useRef < HTMLButtonElement > (null);
-    const canvasRef = useRef < HTMLCanvasElement > (null);
-    const handLandmarkerRef = useRef < HandLandmarker | null > (null);
+    const videoRef = useRef(null);
+    const webcamButtonRef = useRef(null);
+    const canvasRef = useRef(null);
+    const handLandmarkerRef = useRef(null);
     // Use a ref to track whether handLandmarker has been created
     const handLandmarkerCreated = useRef(false);
     // check if landmarker loaded
@@ -89,12 +89,12 @@ const useHandDetection = () => {
                 if (canvasCtx) {
                     canvasCtx.clearRect(0, 0, canvas?.width, canvas?.height);
                 }
-                webcamButton?.innerText = "ENABLE WEBCAM";
+                webcamButton.innerText = "ENABLE WEBCAM";
                 return
             } else {
                 webcamRunning = true
                 setWebcamRunning(true)
-                webcamButton?.innerText = "DISABLE WEBCAM";
+                webcamButton.innerText = "DISABLE WEBCAM";
             }
 
             const video = videoRef.current;
