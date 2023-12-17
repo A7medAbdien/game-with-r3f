@@ -26,7 +26,7 @@ export default function GamePart() {
                     position: [2.5, 4, 6],
                 }}
             >
-                <Perf position="top-left" />
+                {/* <Perf position="top-left" /> */}
 
                 <PerformanceMonitor />
                 <Experience />

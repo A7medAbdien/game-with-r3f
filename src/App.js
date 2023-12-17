@@ -1,3 +1,4 @@
+import GamePart from 'GamePart';
 import './App.css';
 import DetectionPart from './DetectionPart';
 
@@ -8,6 +9,7 @@ function App() {
 
             <DetectionPart />
             <div className="game-part">
+                <GamePart />
             </div>
         </div>
     );
