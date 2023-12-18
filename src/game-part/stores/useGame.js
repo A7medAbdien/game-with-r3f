@@ -16,6 +16,12 @@ export default create(
       endTime: 0,
 
       /**
+       * direction
+       */
+      direction: '',
+      setDirection: (direction) => set({ direction }),
+
+      /**
        * Phases
        */
       phase: 'ready',

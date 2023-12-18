@@ -2,9 +2,10 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { NormalizedLandmarkList, drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 import { HAND_CONNECTIONS } from "@mediapipe/hands";
 import { FilesetResolver, HandLandmarker, HandLandmarkerOptions } from "@mediapipe/tasks-vision";
+import useGame from 'game-part/stores/useGame';
 
 const useHandDetection = () => {
-    const [direction, setDirection] = useState('');
+    const [direction, setDirectionInner] = useState('');
     const videoRef = useRef(null);
     const webcamButtonRef = useRef(null);
     const canvasRef = useRef(null);
@@ -15,6 +16,7 @@ const useHandDetection = () => {
     const [landmarkerLoaded, setLandmarkerLoaded] = useState(false);
     const [webcamRunning, setWebcamRunning] = useState(false);
 
+    const { setDirection } = useGame()
 
     const options = {
         baseOptions: {
@@ -41,6 +43,10 @@ const useHandDetection = () => {
     }, [])
 
     useEffect(() => {
+        setDirection(direction)
+    }, [direction])
+
+    useEffect(() => {
         let lastVideoTime = -1;
         const webcamButton = webcamButtonRef.current
         let webcamRunning = false
@@ -56,7 +62,7 @@ const useHandDetection = () => {
 
                 if (handLandmarkerResult) {
                     draw(handLandmarkerResult?.landmarks);
-                    setDirection(getDirection(handLandmarkerResult?.landmarks));
+                    setDirectionInner(getDirection(handLandmarkerResult?.landmarks));
                 }
 
             }

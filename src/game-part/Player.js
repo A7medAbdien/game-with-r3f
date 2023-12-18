@@ -23,6 +23,7 @@ export default function Player() {
   const end = useGame((state) => state.end)
   const restart = useGame((state) => state.restart)
   const blocksCount = useGame((state) => state.blocksCount)
+  const direction = useGame((state) => state.direction)
   // useGame((state) => console.log(state))
 
   // Function to jump
@@ -87,6 +88,17 @@ export default function Player() {
 
     const impulseStrength = 0.1 * delta
     const torqueStrength = 0.1 * delta
+
+    // Detection
+
+    if (direction == "right") {
+      impulse.x += impulseStrength
+      torque.z -= torqueStrength
+    }
+    if (direction == "left") {
+      impulse.x -= impulseStrength
+      torque.z += torqueStrength
+    }
 
     //Controls
     if (forward) {
