@@ -3,6 +3,8 @@ import { NormalizedLandmarkList, drawConnectors, drawLandmarks } from "@mediapip
 import { HAND_CONNECTIONS } from "@mediapipe/hands";
 import { FilesetResolver, HandLandmarker, HandLandmarkerOptions } from "@mediapipe/tasks-vision";
 import useGame from 'game-part/stores/useGame';
+import { RIGHT } from 'constants';
+import { LEFT } from 'constants';
 
 const useHandDetection = () => {
     const [direction, setDirectionInner] = useState('');
@@ -162,11 +164,10 @@ const useHandDetection = () => {
 
     const getDirection = (landmarks) => {
         if (landmarks && landmarks[0]) {
-            // is the hand right
             if (landmarks[0][9].x < 0.5) {
-                return "right";
+                return RIGHT;
             } else {
-                return "left";
+                return LEFT;
             }
         }
         return ""; // Handle the case where landmarks are not available

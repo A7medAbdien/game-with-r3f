@@ -4,6 +4,7 @@ import { RigidBody, useRapier } from '@react-three/rapier'
 import { useKeyboardControls } from '@react-three/drei'
 import * as THREE from 'three'
 import useGame from './stores/useGame.js'
+import { LEFT, RIGHT } from 'constants.js'
 
 // import { blockCount } from './Experience'
 
@@ -91,11 +92,11 @@ export default function Player() {
 
     // Detection
 
-    if (direction == "right") {
+    if (direction == RIGHT) {
       impulse.x += impulseStrength
       torque.z -= torqueStrength
     }
-    if (direction == "left") {
+    if (direction == LEFT) {
       impulse.x -= impulseStrength
       torque.z += torqueStrength
     }
