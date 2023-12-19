@@ -5,6 +5,9 @@ import { FilesetResolver, HandLandmarker, HandLandmarkerOptions } from "@mediapi
 import useGame from 'game-part/stores/useGame';
 import { RIGHT } from 'constants';
 import { LEFT } from 'constants';
+import { JUMP } from 'constants';
+import { FORWARD } from 'constants';
+import { WALK } from 'constants';
 
 const useHandDetection = () => {
     const [direction, setDirectionInner] = useState('');
@@ -172,7 +175,6 @@ const useHandDetection = () => {
             const distanceX = middleFingerMCP.x - middleFingerTip.x
             const distanceYMiddle = middleFingerMCP.y - middleFingerTip.y
             const distanceYRing = ringFingerMCP.y - ringFIngerTip.y
-            console.log(ringFIngerTip.y, ringFingerMCP.y, distanceYRing);
 
             if (Math.abs(distanceX) > 0.07) {
                 if (distanceX > 0) {
@@ -181,11 +183,10 @@ const useHandDetection = () => {
                     direction.push(LEFT);
                 }
             }
-            // if (Math.abs(distanceYMiddle) > 0.1) {
-            //     if (distanceYMiddle < 0) direction.push(J)
-            // }
-            // if (distanceYRing < 0)
-            //     direction.push("F")
+
+            if (distanceYRing < 0) direction.push(FORWARD)
+            distanceYMiddle < 0 ? direction.push(JUMP) : direction.push(WALK)
+
             return direction
         }
         return []; // Handle the case where landmarks are not available

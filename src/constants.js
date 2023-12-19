@@ -1,3 +1,13 @@
 const RIGHT = "R"
 const LEFT = "L"
-export { RIGHT, LEFT }
+const FORWARD = "F"
+const JUMP = "J"
+const WALK = "W"
+
+export {
+    RIGHT,
+    LEFT,
+    FORWARD,
+    JUMP,
+    WALK
+}

@@ -4,7 +4,7 @@ import { RigidBody, useRapier } from '@react-three/rapier'
 import { useKeyboardControls } from '@react-three/drei'
 import * as THREE from 'three'
 import useGame from './stores/useGame.js'
-import { LEFT, RIGHT } from 'constants.js'
+import { FORWARD, JUMP, LEFT, RIGHT, WALK } from 'constants.js'
 
 // import { blockCount } from './Experience'
 
@@ -28,7 +28,7 @@ export default function Player() {
   // useGame((state) => console.log(state))
 
   // console.log(direction);
-
+  const [canJump, setCanJump] = useState(false)
   // Function to jump
   const jump = () => {
     // console.log('Yes, jump!')
@@ -93,7 +93,6 @@ export default function Player() {
     const torqueStrength = 0.1 * delta
 
     // Detection
-
     if (direction.includes(RIGHT)) {
       impulse.x += impulseStrength
       torque.z -= torqueStrength
@@ -103,10 +102,19 @@ export default function Player() {
       torque.z += torqueStrength
     }
 
-    // if (direction.includes("F")) {
-    //   impulse.z -= impulseStrength
-    //   torque.x -= torqueStrength
-    // }
+    if (direction.includes(FORWARD)) {
+      impulse.z -= impulseStrength
+      torque.x -= torqueStrength
+    }
+
+    if (direction.includes(WALK)) setCanJump(true) //Can jump only if walking
+    else setCanJump(false) //Can't jump if not walking
+
+    // Jump only if canJump is set to true
+    if (direction.includes(JUMP) && canJump) {
+      jump()
+      setCanJump(false) //Can't jump again until walking again
+    }
 
     //Controls
     if (forward) {
