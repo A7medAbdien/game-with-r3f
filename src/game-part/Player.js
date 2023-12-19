@@ -76,16 +76,16 @@ export default function Player() {
         if (value) jump()
       }
     )
-    const unsubscribeAny = subscribeKeys(() => {
-      // console.log('any key down')
-      start()
-    })
+    // const unsubscribeAny = subscribeKeys(() => {
+    //   // console.log('any key down')
+    //   start()
+    // })
 
     return () => {
       unsubscribeReset()
       unsubscribeJump()
       unsubscribeForward()
-      unsubscribeAny()
+      // unsubscribeAny()
     }
   }, [subscribeKeys, jump, reset])
 
