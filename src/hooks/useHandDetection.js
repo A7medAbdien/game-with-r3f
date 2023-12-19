@@ -8,6 +8,8 @@ import { LEFT } from 'constants';
 import { JUMP } from 'constants';
 import { FORWARD } from 'constants';
 import { WALK } from 'constants';
+import { HAND_LANDMARKS_MODEL_URL } from 'constants';
+import { WASM_URL } from 'constants';
 
 const useHandDetection = () => {
     const [direction, setDirectionInner] = useState('');
@@ -25,7 +27,7 @@ const useHandDetection = () => {
 
     const options = {
         baseOptions: {
-            modelAssetPath: `/models/hand_landmarker.task`,
+            modelAssetPath: HAND_LANDMARKS_MODEL_URL,
             delegate: "GPU"
         },
         numHands: 1,
@@ -35,7 +37,7 @@ const useHandDetection = () => {
     // Create or retrieve handLandmarker
     const createHandLandmarker = async () => {
         if (!handLandmarkerCreated.current) {
-            const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm");
+            const vision = await FilesetResolver.forVisionTasks(WASM_URL);
             handLandmarkerRef.current = await HandLandmarker.createFromOptions(vision, options);
             handLandmarkerCreated.current = true;
             setLandmarkerLoaded(true);
