@@ -63,6 +63,13 @@ export default function Player() {
       }
     )
 
+    const unsubscribeForward = useGame.subscribe(
+      (state) => state.direction,
+      (value) => {
+        if (value.includes(FORWARD)) start()
+      }
+    )
+
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
       (value) => {
@@ -77,6 +84,7 @@ export default function Player() {
     return () => {
       unsubscribeReset()
       unsubscribeJump()
+      unsubscribeForward()
       unsubscribeAny()
     }
   }, [subscribeKeys, jump, reset])
@@ -117,25 +125,25 @@ export default function Player() {
     }
 
     //Controls
-    if (forward) {
-      impulse.z -= impulseStrength
-      torque.x -= torqueStrength
-    }
+    // if (forward) {
+    //   impulse.z -= impulseStrength
+    //   torque.x -= torqueStrength
+    // }
 
-    if (rightward) {
-      impulse.x += impulseStrength
-      torque.z -= torqueStrength
-    }
+    // if (rightward) {
+    //   impulse.x += impulseStrength
+    //   torque.z -= torqueStrength
+    // }
 
-    if (backward) {
-      impulse.z += impulseStrength
-      torque.x += torqueStrength
-    }
+    // if (backward) {
+    //   impulse.z += impulseStrength
+    //   torque.x += torqueStrength
+    // }
 
-    if (leftward) {
-      impulse.x -= impulseStrength
-      torque.z += torqueStrength
-    }
+    // if (leftward) {
+    //   impulse.x -= impulseStrength
+    //   torque.z += torqueStrength
+    // }
 
     body.current.applyImpulse(impulse)
     body.current.applyTorqueImpulse(torque)
