@@ -18,7 +18,7 @@ export default create(
       /**
        * direction
        */
-      direction: '',
+      direction: [],
       setDirection: (direction) => set({ direction }),
 
       /**

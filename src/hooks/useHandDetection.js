@@ -164,13 +164,31 @@ const useHandDetection = () => {
 
     const getDirection = (landmarks) => {
         if (landmarks && landmarks[0]) {
-            if (landmarks[0][9].x < 0.5) {
-                return RIGHT;
-            } else {
-                return LEFT;
+            const direction = []
+            const middleFingerTip = landmarks[0][12];
+            const middleFingerMCP = landmarks[0][9];
+            const ringFIngerTip = landmarks[0][16];
+            const ringFingerMCP = landmarks[0][13];
+            const distanceX = middleFingerMCP.x - middleFingerTip.x
+            const distanceYMiddle = middleFingerMCP.y - middleFingerTip.y
+            const distanceYRing = ringFingerMCP.y - ringFIngerTip.y
+            console.log(ringFIngerTip.y, ringFingerMCP.y, distanceYRing);
+
+            if (Math.abs(distanceX) > 0.07) {
+                if (distanceX > 0) {
+                    direction.push(RIGHT);
+                } else {
+                    direction.push(LEFT);
+                }
             }
+            // if (Math.abs(distanceYMiddle) > 0.1) {
+            //     if (distanceYMiddle < 0) direction.push(J)
+            // }
+            // if (distanceYRing < 0)
+            //     direction.push("F")
+            return direction
         }
-        return ""; // Handle the case where landmarks are not available
+        return []; // Handle the case where landmarks are not available
     };
 
     return { landmarkerLoaded, webcamRunning, direction, videoRef, webcamButtonRef, canvasRef };

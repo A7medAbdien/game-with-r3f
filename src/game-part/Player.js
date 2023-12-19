@@ -27,6 +27,8 @@ export default function Player() {
   const direction = useGame((state) => state.direction)
   // useGame((state) => console.log(state))
 
+  // console.log(direction);
+
   // Function to jump
   const jump = () => {
     // console.log('Yes, jump!')
@@ -92,14 +94,19 @@ export default function Player() {
 
     // Detection
 
-    if (direction == RIGHT) {
+    if (direction.includes(RIGHT)) {
       impulse.x += impulseStrength
       torque.z -= torqueStrength
     }
-    if (direction == LEFT) {
+    if (direction.includes(LEFT)) {
       impulse.x -= impulseStrength
       torque.z += torqueStrength
     }
+
+    // if (direction.includes("F")) {
+    //   impulse.z -= impulseStrength
+    //   torque.x -= torqueStrength
+    // }
 
     //Controls
     if (forward) {
