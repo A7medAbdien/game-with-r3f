@@ -147,18 +147,18 @@ export function BlockLimbo({ position = [0, 0, 0] }) {
 }
 
 export function BlockAxe({ position = [0, 0, 0] }) {
-  const obstacle = useRef()
+  // const obstacle = useRef()
   const [timeOffset] = useState(() => Math.random() * Math.PI * 2)
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime()
 
     const x = Math.sin(time + timeOffset) * 1.25
-    obstacle.current.setNextKinematicTranslation({
-      x: position[0] + x,
-      y: position[1] + 0.75,
-      z: position[2],
-    })
+    // obstacle.current.setNextKinematicTranslation({
+    //   x: position[0] + x,
+    //   y: position[1] + 0.75,
+    //   z: position[2],
+    // })
   })
 
   return (
@@ -170,7 +170,7 @@ export function BlockAxe({ position = [0, 0, 0] }) {
         scale={[4, 0.2, 4]}
         receiveShadow
       />
-      <RigidBody
+      {/* <RigidBody
         ref={obstacle}
         type="kinematicPosition"
         position={[0, 0.3, 0]}
@@ -184,7 +184,7 @@ export function BlockAxe({ position = [0, 0, 0] }) {
           castShadow
           receiveShadow
         />
-      </RigidBody>
+      </RigidBody> */}
     </group>
   )
 }
