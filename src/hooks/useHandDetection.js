@@ -178,7 +178,7 @@ const useHandDetection = () => {
             const distanceYMiddle = middleFingerMCP.y - middleFingerTip.y
             const distanceYRing = ringFingerMCP.y - ringFIngerTip.y
 
-            if (Math.abs(distanceX) > 0.07) {
+            if (Math.abs(distanceX) > 0.05) {
                 if (distanceX > 0) {
                     direction.push(RIGHT);
                 } else {
