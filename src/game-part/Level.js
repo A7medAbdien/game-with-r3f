@@ -2,7 +2,7 @@ import { useMemo, useState, useRef } from 'react'
 import * as THREE from 'three'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { useFrame } from '@react-three/fiber'
-import { Center, Float, Text, Text3D, useGLTF } from '@react-three/drei'
+import { Center, Float, Text, Text3D, useGLTF, useMatcapTexture } from '@react-three/drei'
 import useGame from './stores/useGame.js'
 
 THREE.ColorManagement.legacyMode = false
@@ -191,6 +191,7 @@ export function BlockAxe({ position = [0, 0, 0] }) {
 
 export function BlockEnd({ position = [0, 0, 0] }) {
   // const hamburger = useGLTF('./hamburger.glb')
+  const [matcapTexture] = useMatcapTexture('71623B_ECDE8C_30250A_ABA69A', 128)
 
   const phase = useGame((state) => state.phase)
   console.log('🚀 ~ file: Level.js:196 ~ BlockEnd ~ phase', phase)
@@ -249,7 +250,7 @@ export function BlockEnd({ position = [0, 0, 0] }) {
               letterSpacing={-0.06}
               font="/Inter_Bold.json">
               DIDACTA
-              <meshNormalMaterial />
+              <meshMatcapMaterial matcap={matcapTexture} />
             </Text3D>
           </Center>
         </group>
@@ -319,7 +320,7 @@ export function Level({
         <Block key={index} position={[0, 0, -(index + 1) * 4]} />
       ))}
 
-      <BlockEnd position={[0, 0, -(count + 1) * 4]} />
+      <BlockEnd position={[0, 0, 0]} />
 
       <Bounds length={count + 2} />
     </>
