@@ -2,7 +2,7 @@ import { useMemo, useState, useRef } from 'react'
 import * as THREE from 'three'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { useFrame } from '@react-three/fiber'
-import { Float, Text, useGLTF } from '@react-three/drei'
+import { Center, Float, Text, Text3D, useGLTF } from '@react-three/drei'
 import useGame from './stores/useGame.js'
 
 THREE.ColorManagement.legacyMode = false
@@ -190,34 +190,34 @@ export function BlockAxe({ position = [0, 0, 0] }) {
 }
 
 export function BlockEnd({ position = [0, 0, 0] }) {
-  const hamburger = useGLTF('./hamburger.glb')
+  // const hamburger = useGLTF('./hamburger.glb')
 
   const phase = useGame((state) => state.phase)
   console.log('🚀 ~ file: Level.js:196 ~ BlockEnd ~ phase', phase)
-
-  hamburger.scene.children.forEach((mesh) => {
-    mesh.castShadow = true
-  })
-
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime()
-
-    const rotation = new THREE.Quaternion()
-    rotation.setFromEuler(new THREE.Euler(0, time * 0.5, 0))
-    hamburger.scene.quaternion.copy(rotation)
-
-    if (phase === 'ended') {
-      hamburger.scene.position.y = Math.sin(time * 2) * 0.5 + 1.5
-    }
-
-    if (phase === 'playing') {
-      hamburger.scene.position.y = 0
-    }
-
-    if (phase === 'ready') {
-      hamburger.scene.position.y = 0
-    }
-  })
+  //
+  // hamburger.scene.children.forEach((mesh) => {
+  //   mesh.castShadow = true
+  // })
+  //
+  // useFrame((state) => {
+  //   const time = state.clock.getElapsedTime()
+  //
+  //   const rotation = new THREE.Quaternion()
+  //   rotation.setFromEuler(new THREE.Euler(0, time * 0.5, 0))
+  //   hamburger.scene.quaternion.copy(rotation)
+  //
+  //   if (phase === 'ended') {
+  //     hamburger.scene.position.y = Math.sin(time * 2) * 0.5 + 1.5
+  //   }
+  //
+  //   if (phase === 'playing') {
+  //     hamburger.scene.position.y = 0
+  //   }
+  //
+  //   if (phase === 'ready') {
+  //     hamburger.scene.position.y = 0
+  //   }
+  // })
   return (
     <group position={position}>
       <Text
@@ -235,15 +235,25 @@ export function BlockEnd({ position = [0, 0, 0] }) {
         scale={[4, 0.2, 4]}
         receiveShadow
       />
-      <RigidBody
-        type="fixed"
-        colliders="hull"
-        position={[0, 0.25, 0]}
-        restitution={0.2}
-        friction={0}
-      >
-        <primitive object={hamburger.scene} scale={0.2} />
-      </RigidBody>
+      <Float>
+        <group position={[0, 0.75, 0]}>
+          <Center>
+            <Text3D
+              scale={.5}
+              curveSegments={32}
+              bevelEnabled
+              bevelSize={0.04}
+              bevelThickness={0.1}
+              height={0.5}
+              lineHeight={0.5}
+              letterSpacing={-0.06}
+              font="/Inter_Bold.json">
+              DIDACTA
+              <meshNormalMaterial />
+            </Text3D>
+          </Center>
+        </group>
+      </Float>
     </group>
   )
 }
